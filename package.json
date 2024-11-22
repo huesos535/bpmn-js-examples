@@ -37,6 +37,7 @@
     "custom-modeling-rules",
     "deep-linking",
     "i18n",
+    "implicit-keyboard-bind",
     "minimap",
     "modeler",
     "modeling-api",
