@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <process id="cottage_sales_process" name="Process of Selling Cottages in a Village">
+    
+    <!-- Start Event -->
+    <startEvent id="start" name="Customer Inquiry">
+      <outgoing>flow1</outgoing>
+    </startEvent>
+
+    <!-- Task: Gather Requirements -->
+    <task id="task1" name="Gather Customer Requirements">
+      <incoming>flow1</incoming>
+      <outgoing>flow2</outgoing>
+    </task>
+
+    <!-- Task: Provide Offer -->
+    <task id="task2" name="Provide Cottage Offer">
+      <incoming>flow2</incoming>
+      <outgoing>flow3</outgoing>
+    </task>
+
+    <!-- Exclusive Gateway: Customer Decision -->
+    <exclusiveGateway id="gateway1" name="Customer Decision">
+      <incoming>flow3</incoming>
+      <outgoing>flow4</outgoing>
+      <outgoing>flow5</outgoing>
+    </exclusiveGateway>
+
+    <!-- Task: Negotiate -->
+    <task id="task3" name="Negotiate Terms">
+      <incoming>flow4</incoming>
+      <outgoing>flow6</outgoing>
+    </task>
+
+    <!-- Task: Contract Preparation -->
+    <task id="task4" name="Prepare Contract">
+      <incoming>flow6</incoming>
+      <outgoing>flow7</outgoing>
+    </task>
+
+    <!-- End Event: Sale Successful -->
+    <endEvent id="end1" name="Sale Successful">
+      <incoming>flow7</incoming>
+    </endEvent>
+
+    <!-- End Event: Sale Unsuccessful -->
+    <endEvent id="end2" name="Sale Unsuccessful">
+      <incoming>flow5</incoming>
+    </endEvent>
+
+    <!-- Sequence Flows -->
+    <sequenceFlow id="flow1" sourceRef="start" targetRef="task1" />
+    <sequenceFlow id="flow2" sourceRef="task1" targetRef="task2" />
+    <sequenceFlow id="flow3" sourceRef="task2" targetRef="gateway1" />
+    <sequenceFlow id="flow4" sourceRef="gateway1" targetRef="task3" />
+    <sequenceFlow id="flow5" sourceRef="gateway1" targetRef="end2" />
+    <sequenceFlow id="flow6" sourceRef="task3" targetRef="task4" />
+    <sequenceFlow id="flow7" sourceRef="task4" targetRef="end1" />
+
+  </process>
+</definitions>
